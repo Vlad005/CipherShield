@@ -1,22 +1,105 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cipher Shield Technology</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js"></script> 
 </head>
 <body>
-    <button onclick="">Generate Keys</button>
-    <div id="private-key"></div>
-    <br />
-    <div>Encrypt Data</div>
-    <input type="text" id="CompanyId" placeholder="CompanyId" />
-    <input type="text" id="Data" placeholder="Data" />
-    <br />
-    <br />
-    <div>Decrypt Data **ONLY FOR TESTING PURPOSES**</div>
-    <input type="text" id="PrivateKey" placeholder="PrivateKey" />
-    <input type="text" id="Data" placeholder="Data" />
+    <body>
+        <header id="top-header" class="header-transparent">
+            <div class="container nav-container">
+                <h1><a style="text-decoration: none; color:white" href="/">Cipher Shield Technology</a></h1>
+                <nav>
+                    <ul>
+                      <!--  <li><a href="#why-choose">Why Choose</a></li>-->
+                      <li><a href="/">Our Services</a></li>
+                      <li><a href="/signup">Sign Up</a></li> 
+                     <li><a href="/login">Login</a></li>
+                     <li><a href="/#contact">Contact Us</a></li>
+ 
+ 
+                    </ul>
+                </nav>
+            </div>
+        </header>
+    
+
+    <section id="hero">
+        <div class="container heroSection">
+            <!--<img src="Images/city.jpg" alt="City image" style="display:;">-->
+            <h2>Your Privacy and Security Matters</h2>
+            <p >Protect your sensitive information</p>
+            <p>as it travels through the digital world.</p>
+            <a href="#encrypt" class="btn-primary">Get Started</a>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container service-container">
+            <h2 style="text-align: center; padding-bottom: 30px">WHY CHOOSE US?</h2>
+            <div class="features-container">
+                <div class="column">
+                    <div class="feature">
+                        <h3>Secure and Protect</h3>
+                        <p>No sensetive data is saved and all Activities Encrypted and Anonymous.</p>
+                    </div>
+
+                    <div class="feature">
+                        <h3>Easy and Reliable</h3>
+                        <p>Easy to use Web Application and Reliable APIs.</p>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="feature">
+                        <h3>Modern Encryption Methods</h3>
+                        <p>We use only most reliable and modern algorithms to protect your data.</p>
+                    </div>
+
+                    <div class="feature">
+                        <h3>Avaliable For Your Business</h3>
+                        <p>If you want to recieve secured data from your clients, use our API to provide best experience for them.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="encrypt">
+        <div style="height: 250px;background: rgb(25, 0, 97);display: flex;flex-direction: column;padding: 30px;align-items: center;">
+            <div style="font-size: 27px;">Encrypt Your Data!</div>
+            <input type="text" placeholder="Enter Reciever Company ID" style="margin: 10px 0;margin-top: 30px; background: white; border-radius: 6px; outline: 0; border: 0; width: 90%; max-width: 400px; min-height: 40px; font-size: 16px;padding: 0 5px;" />
+            <input type="text" placeholder="Enter information to encrypt" style="margin: 10px 0; background: white; border-radius: 6px; outline: 0; border: 0; width: 90%; max-width: 400px; min-height: 40px; font-size: 16px;padding: 0 5px;" />
+            <button style="margin-top: 20px; font-size: 17px;padding: 10px; border: 1px solid rgb(97, 91, 217);background-color: white;border-radius: 6px;cursor: pointer;">Encrypt with CipherShield!</button>
+        </div>
+    </section>
+
+    
+
+
+<!-- 
+    <section id="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>Learn more about our mission and commitment to your online security.</p>
+        </div>
+    </section>
+-->
+    <section id="contact" style="padding-top: 50px;">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or feedback, feel free to get in touch.</p>
+            <a href="mailto:contact@bellsecure.com" class="contact-button">Email Us</a>
+        </div>
+    </section>
+    
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Bell Secure. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
