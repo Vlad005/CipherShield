@@ -5,10 +5,11 @@ const validateEmail = (email: string): boolean => {
   return re.test(email);
 };
 
-interface IBusiness {
+export interface IBusiness {
   name: string;
   email: string;
   passwd: string;
+  pubKey?: string;
 }
 
 const BusinessSchema = new Schema<IBusiness>({
