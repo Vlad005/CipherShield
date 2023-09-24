@@ -17,6 +17,7 @@ import {
 } from "./server/helpers/encrypt_helpers";
 import { createToken } from "./utils/jwt";
 import { IBusiness } from "./utils/db";
+import { decodeToken } from "./utils/jwt";
 
 const app: Application = express();
 const port: number = 8000;
@@ -25,17 +26,28 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.get("/get_keys", (req: Request, res: Response) => {
-  const private_key = generate_keys(1);
-  res.send(`Private key: ${private_key}`);
+  if ((req.query?.company_id)) {
+    // const id = decodeToken(req.query?.company_id.toString());
+
+    const id = '001';
+    const private_key = generate_keys(id.toString());
+    res.send(`Private key: ${private_key}`);
+  }
 });
 
 app.get("/encrypt_data", (req: Request, res: Response) => {
   if ((req.query?.data, req.query?.company_id)) {
     // Getting public key from db should be here
-    const public_key: string = `-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAxbJL9x7YunLsRKU2+ISQdP6s5s9KeiyG7ZiZwJadgJkj/RucgsBPH4kZhqG7hipfuI/eORjSJbzlWku6QfxRVLJI20OhMoS9BlTTKK1la5fxfi0an9L7dkwJpYVr5YIhlW9q8NGjaxNkvs5w2N9IEUcY5g6qWrqTFJKd30Kq9IpehMZW6crrkUywlr9F1fRtjF1bIhxyP/IU2/H3gBw1meOrzLnHV0HCdYqqVjYh9XN5DhGB/mJgnwyXEjLuQipvd8VvGLZV7BISWYGN+T1lErKcYb7IEjPo4GC1TVA5wUhhusWmwmK0SC8/vGzJdxoh19hLT2nmT2fIdlQssGp+bQIDAQAB\n-----END RSA PUBLIC KEY-----`;
+    //const public_key: string = `-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAxbJL9x7YunLsRKU2+ISQdP6s5s9KeiyG7ZiZwJadgJkj/RucgsBPH4kZhqG7hipfuI/eORjSJbzlWku6QfxRVLJI20OhMoS9BlTTKK1la5fxfi0an9L7dkwJpYVr5YIhlW9q8NGjaxNkvs5w2N9IEUcY5g6qWrqTFJKd30Kq9IpehMZW6crrkUywlr9F1fRtjF1bIhxyP/IU2/H3gBw1meOrzLnHV0HCdYqqVjYh9XN5DhGB/mJgnwyXEjLuQipvd8VvGLZV7BISWYGN+T1lErKcYb7IEjPo4GC1TVA5wUhhusWmwmK0SC8/vGzJdxoh19hLT2nmT2fIdlQssGp+bQIDAQAB\n-----END RSA PUBLIC KEY-----`;
+    const id = req.query?.company_id.toString();
+    const pubkey = Business.findById(id).pubKey;
 
     const data = req.query?.data || "";
-    const encrypted_data: string = encrypt_data(data.toString(), public_key);
+    let encrypted_data: string = '';
+    if(pubkey)
+      encrypted_data = encrypt_data(data.toString(), pubkey);
+    else
+      res.send('no such company with entered id')
     res.send(
       `Encrypted string for company ${req.query?.company_id}: ${encrypted_data}`
     );

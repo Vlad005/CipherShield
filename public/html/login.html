@@ -25,6 +25,7 @@
         const result = await res.json();
         console.log(result);
         localStorage.jwt = result.token;
+        location.replace('/')
       };
     </script>
   </head>

@@ -1,6 +1,7 @@
 import { generateKeyPairSync, KeyPairKeyObjectResult, publicEncrypt, privateDecrypt } from 'crypto'
+import { Business } from '../../utils/db';
 
-export const generate_keys = (company_id: number): string => {
+export const generate_keys = (company_id: string): string => {
     const key_pair: KeyPairKeyObjectResult = generateKeyPairSync("rsa", {
         modulusLength: 2048,
     });
@@ -8,8 +9,9 @@ export const generate_keys = (company_id: number): string => {
     const private_key: string = key_pair.privateKey.export({format: 'pem', type: 'pkcs1'}) as string;
     const public_key: string = key_pair.publicKey.export({format: 'pem', type: 'pkcs1'}) as string
 
+    Business.findOneAndUpdate({_id: company_id }, {$set:{ pubKey: public_key}});
     // Adding public key to db should be here
-    console.log(`-- PUBLIC KEY FOR ${company_id}: ${public_key}`);
+    //console.log(`-- PUBLIC KEY FOR ${company_id}: ${public_key}`);
 
     return private_key;
 }
