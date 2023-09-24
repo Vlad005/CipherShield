@@ -123,6 +123,18 @@ app.get("/", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "public/html/index.html"));
 });
 
+app.get('/login', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, 'public/html/login.html'));
+});
+
+app.get('/signup', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, 'public/html/Signup.html'));
+});
+
+app.get('/otp', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, 'public/html/OTP.html'));
+});
+
 https
   .createServer(
     {
