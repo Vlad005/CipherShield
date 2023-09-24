@@ -45,8 +45,8 @@ app.post('/decrypt_data', (req: Request, res: Response) => {
 https
   .createServer(
     {
-      key: fs.readFileSync("server.key"),
-      cert: fs.readFileSync("server.cert"),
+      key: fs.readFileSync("SSL/server.key"),
+      cert: fs.readFileSync("SSL/server.cert"),
     },
     app
   )
