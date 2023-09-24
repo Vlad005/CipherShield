@@ -1,0 +1,394 @@
+/* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set a background color and text color */
+body {
+    background-color: #0C0032;
+    font-family: Arial, sans-serif;
+    color: #fff;
+}
+
+/* Container to center content */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styles */
+header {
+    background-color: #190061;
+    color: #fff;
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: fixed; /* Fixed position to stay at the top when scrolling */
+    width: 100%; /* Full width */
+    z-index: 1000; /* Ensure it's above other elements */
+    transition: background-color 0.3s ease; /* Smooth color transition */
+}
+
+/* Stylish navigation container */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 28px;
+    margin: 0;
+    padding-left: 20px;
+}
+
+nav ul {
+    list-style: none;
+    text-align: right;
+}
+
+nav ul li {
+    display: inline;
+    margin-left: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #240090;
+}
+
+.header-transparent {
+    background-color: #0C0032;
+    transition: background-color 0.3s ease;
+}
+
+/* Make the navigation bar opaque when scrolling */
+.header-opaque {
+    background-color: #190061;
+}
+/* Hero section styles */
+#hero {
+    text-align: center;
+    padding: 200px;
+    background-color: #190061 ;
+    background-image:url(/Images/protectinfo.avif),url(/Images/transCity.png);
+    background-size:500px;
+    background-repeat: no-repeat;
+    background-position: 30px, 1000px;
+    background-position-y: 150px, 350px;
+    color: #fff;
+}
+
+
+#hero h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+
+}
+
+#hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+    background-color: #3500D3;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #282828;
+}
+
+/* Features section styles */
+#features {
+    background-color: #190061;
+    padding: 60px 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#features h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.features-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    flex-basis: calc(50% - 20px);
+}
+
+.feature {
+    margin: 0 40px 30px;
+    padding: 20px;
+    background-color: #0C0032;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.feature:hover {
+    transform: scale(1.05);
+}
+
+.feature h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #fff;
+    text-align: center;
+}
+
+.feature p {
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+
+}
+
+/* Download section styles */
+#download {
+    text-align: center;
+    padding: 100px 0;
+    background-color: #3500D3;
+    color: #fff;
+}
+
+#download h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+#download p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+/* Contact section styles */
+#contact {
+    text-align: center;
+    padding: 60px 0;
+    background-color: #282828;
+}
+
+#contact h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+#contact p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #fff;
+}
+
+.contact-button {
+    display: inline-block;
+    background-color: #3500D3;
+    color: #fff;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.contact-button:hover {
+    background-color: #240090;
+}
+
+/* Footer styles */
+footer {
+    background-color: #282828;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer p {
+    font-size: 16px;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+    box-sizing: border-box;
+    float: left;
+    padding: 10px;
+  }
+
+  /* Clear floats after the columns */
+  .row:after {
+    box-sizing: border-box;
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  /* Styles for the left column */
+.left {
+    width: 50%;
+    height: 350px;
+    background-color:#190061;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.left h2 {
+    font-size: 28px;
+    margin-top: 100px;
+    margin-bottom: 40px;
+}
+
+.left p {
+    font-size: 18px;
+}
+
+/* Styles for the right column (signup form) */
+.right {
+    width: 50%;
+    height: 350px;
+    background-color:#190061;
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.right h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Customize form input styles as needed */
+.right input[type="text"],
+.right input[type="email"],
+.right input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.right button[type="submit"] {
+    margin: 0 auto;
+    background-color: #240090;
+    color: #fff;
+    padding: 12px 24px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.right button[type="submit"]:hover {
+    background-color: #190061;
+}
+
+
+
+
+/* Create two unequal columns that floats next to each other */
+.columnL {
+    box-sizing: border-box;
+    float: left;
+    padding: 10px;
+  }
+
+  /* Clear floats after the columns */
+  .rowL:after {
+    box-sizing: border-box;
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  /* Styles for the left column */
+.leftL {
+    width: 50%;
+    background-color:#0C0032;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.leftL h2 {
+    font-size: 28px;
+    margin-top: 100px;
+    margin-bottom: 40px;
+}
+
+.leftL p {
+    font-size: 18px;
+}
+
+/* Styles for the right column (signup form) */
+.rightL {
+    width: 50%;
+    height: 350px;
+    background-color:#0C0032;
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.rightL h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Customize form input styles as needed */
+.rightL input[type="text"],
+.rightL input[type="email"],
+.rightL input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.rightL button[type="submit"] {
+    display: block;
+    margin: 0 auto;
+    background-color: #240090;
+    color: #fff;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.rightL button[type="submit"]:hover {
+    background-color: #190061;
+}
+
+#login-form{
+    margin-top: 80px; 
+    width: 80%;
+    margin-left: 70px;
+}
+
+
+.service-container{
+    padding-top: 100px;
+}
+
+body{
+    scroll-behavior: smooth;
+}
