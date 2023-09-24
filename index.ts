@@ -9,6 +9,7 @@ import express, { Request, Response , Application } from 'express';
 import nodemailer from "nodemailer";
 import { Error, connect } from "mongoose";
 import bcrypt from "bcrypt";
+import otpGenerator from "otp-generator"
 
 import { generate_keys, encrypt_data, decrypt_data } from './server/helpers/encrypt_helpers';
 
@@ -52,6 +53,10 @@ app.post('/decrypt_data', (req: Request, res: Response) => {
 });
 
 app.post("/send_otp", async (req: Request, res: Response) => {
+  if (req.body.email === undefined) {
+    res.status(400).json({ message: "Email required." });
+    return;
+  }
   var transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com",
     auth: {
@@ -59,16 +64,21 @@ app.post("/send_otp", async (req: Request, res: Response) => {
       pass: process.env.EMAIL_PASS,
     },
   });
+
+  let otp = otpGenerator.generate(6, {});
+
   const mailOpts = {
     from: process.env.EMAIL_USER,
-    to: "capssyt@gmail.com",
-    subject: "OTP",
-    text: "here goes your OTP",
+    to: req.body.email,
+    subject: "Login OTP",
+    text: `Here goes your OTP: ${otp}`,
   };
   const mailRes = await transporter.sendMail(mailOpts);
   console.log("Email sent:");
   console.log(mailRes);
+  res.status(200).json({ otp: otp });
 });
+
 
 app.post("/comp_business_pswd", async (req: Request, res: Response) => {
   // find a business with a business name
