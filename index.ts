@@ -27,10 +27,10 @@ app.use(express.static("public"));
 
 app.get("/get_keys", (req: Request, res: Response) => {
   if ((req.query?.company_id)) {
-    // const id = decodeToken(req.query?.company_id.toString());
+    const id = decodeToken(req.query?.company_id.toString());
 
-    const id = '001';
-    const private_key = generate_keys(id.toString());
+    //const id = '001';
+    const private_key = generate_keys(id.id.toString());
     res.send(`Private key: ${private_key}`);
   }
 });

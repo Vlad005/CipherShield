@@ -6,6 +6,6 @@ export const createToken = (id: string): string => {
 }
 
 export const decodeToken = (token:string) : JwtPayload => {
-    let decoded = jwt.verify(token, process.env.JWT_TOKEN as Secret) as JwtPayload;
+    let decoded = jwt.verify(token, process.env.JWT_SECRET as Secret) as JwtPayload;
     return decoded;
 }
