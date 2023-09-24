@@ -2,6 +2,11 @@ require("dotenv").config();
 
 import { Schema, model, connect } from "mongoose";
 
+const validateEmail = (email: string): boolean => {
+  var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  return re.test(email);
+};
+
 interface IBusiness {
   name: string;
   email: string;
@@ -9,8 +14,19 @@ interface IBusiness {
 }
 
 const BusinessSchema = new Schema<IBusiness>({
-  name: { type: String, required: true },
-  email: { type: String, required: true },
+  name: { type: String, required: true, unique: true },
+  email: {
+    type: String,
+    trim: true,
+    lowercase: true,
+    unique: true,
+    required: [true, "Email address is required"],
+    validate: [validateEmail, "Please fill a valid email address"],
+    // match: [
+    //   /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+    //   "Please fill a valid email address",
+    // ],
+  },
   passwd: { type: String, required: true },
 });
 
@@ -22,11 +38,11 @@ const test = async () => {
   );
   const business = new Business({
     name: "MyBusiness",
-    email: "letsgo@gmail.com",
+    email: "letsgo2@gmail.com",
     passwd: "12345",
   });
   await business.save();
   console.log(`saved`);
 };
 
-test().catch((err) => console.log(err));
+test().catch((err) => console.log(err.message));
