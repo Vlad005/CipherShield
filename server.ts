@@ -4,6 +4,7 @@ import express, { Request, Response, Application } from "express";
 import { Error, connect } from "mongoose";
 import bcrypt from "bcrypt";
 import nodemailer from "nodemailer";
+import otpGenerator from "otp-generator";
 
 const app: Application = express();
 const port: number = 3001;
@@ -11,6 +12,10 @@ const port: number = 3001;
 app.use(express.json());
 
 app.post("/send_otp", async (req: Request, res: Response) => {
+  if (req.body.email === undefined) {
+    res.status(400).json({ message: "Email required." });
+    return;
+  }
   var transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com",
     auth: {
@@ -18,15 +23,19 @@ app.post("/send_otp", async (req: Request, res: Response) => {
       pass: process.env.EMAIL_PASS,
     },
   });
+
+  let otp = otpGenerator.generate(6, {});
+
   const mailOpts = {
     from: process.env.EMAIL_USER,
-    to: "capssyt@gmail.com",
-    subject: "OTP",
-    text: "here goes your OTP",
+    to: req.body.email,
+    subject: "Login OTP",
+    text: `Here goes your OTP: ${otp}`,
   };
   const mailRes = await transporter.sendMail(mailOpts);
   console.log("Email sent:");
   console.log(mailRes);
+  res.status(200).json({ otp: otp });
 });
 
 app.post("/comp_business_pswd", async (req: Request, res: Response) => {
@@ -76,7 +85,7 @@ app.post("/business", async (req: Request, res: Response) => {
 
 app.listen(port, async () => {
   console.log(`express server listening on port ${port}...`);
-  const db = await connect(
+  const db = await  connect(
     `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWD}@cluster0.96aenru.mongodb.net/?retryWrites=true&w=majority`
   );
 });
