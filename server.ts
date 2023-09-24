@@ -1,21 +1,68 @@
 require("dotenv").config();
 const { Business } = require("./utils/db");
-import { error } from "console";
 import express, { Request, Response, Application } from "express";
 import { Error, connect } from "mongoose";
+import bcrypt from "bcrypt";
+import nodemailer from "nodemailer";
 
 const app: Application = express();
 const port: number = 3001;
 
 app.use(express.json());
 
+app.post("/send_otp", async (req: Request, res: Response) => {
+  var transporter = nodemailer.createTransport({
+    host: "smtp-mail.outlook.com",
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+  const mailOpts = {
+    from: process.env.EMAIL_USER,
+    to: "capssyt@gmail.com",
+    subject: "OTP",
+    text: "here goes your OTP",
+  };
+  const mailRes = await transporter.sendMail(mailOpts);
+  console.log("Email sent:");
+  console.log(mailRes);
+});
+
+app.post("/comp_business_pswd", async (req: Request, res: Response) => {
+  // find a business with a business name
+  const bus = await Business.findOne({ name: req.body.name });
+  console.log(bus);
+  if (bus === null) {
+    res
+      .status(404)
+      .json({ message: `Business with name ${req.body.name} not found.` });
+    return;
+  }
+  // compare hashed and plain passwords
+  if (req.body.passwd === undefined) {
+    res.status(400).json({ message: "Password not specified." });
+    return;
+  }
+  const match = await bcrypt.compare(req.body.passwd, bus.passwd);
+  res.status(200).json({ match: match });
+});
+
 app.post("/business", async (req: Request, res: Response) => {
+  // hash a new password
+  let hashedPswd: string | null = null;
+  if (req.body.passwd != undefined) {
+    const hashedPswd = await bcrypt.hash(req.body.passwd, 10);
+    console.log(hashedPswd);
+  }
+  // create a doc
   const business = new Business({
     name: req.body.name,
     email: req.body.email,
-    passwd: req.body.passwd,
+    passwd: hashedPswd,
   });
   console.log(business);
+  // save the doc
   business
     .save()
     .then((x: Object) => {
